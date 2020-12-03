@@ -1,0 +1,33 @@
+1) Optimal Substructure:
+Let the input sequences be X[0..m-1] and Y[0..n-1] of lengths m and n respectively. And let L(X[0..m-1], Y[0..n-1]) be the length of LCS of the two sequences X and Y.
+Following is the recursive definition of L(X[0..m-1], Y[0..n-1]).
+
+If last characters of both sequences match (or X[m-1] == Y[n-1]) then
+L(X[0..m-1], Y[0..n-1]) = 1 + L(X[0..m-2], Y[0..n-2])
+
+If last characters of both sequences do not match (or X[m-1] != Y[n-1]) then
+L(X[0..m-1], Y[0..n-1]) = MAX ( L(X[0..m-2], Y[0..n-1]), L(X[0..m-1], Y[0..n-2]) )
+
+Examples:
+1) Consider the input strings “AGGTAB” and “GXTXAYB”. Last characters match for the strings. So length of LCS can be written as:
+L(“AGGTAB”, “GXTXAYB”) = 1 + L(“AGGTA”, “GXTXAY”)
+
+
+
+
+class Solution {
+public:
+    int longestCommonSubsequence(string text1, string text2) {
+        int m = text1.size(), n = text2.size();
+        vector<vector<int>> dp(m + 1, vector<int>(n + 1));
+        for (int i = 1; i <= m; ++i) {
+            for (int j = 1; j <= n; ++j) {
+                if (text1[i - 1] == text2[j - 1])
+                    dp[i][j] = dp[i - 1][j - 1] + 1;
+                else
+                    dp[i][j] = max(dp[i - 1][j], dp[i][j - 1]);
+            }
+        }
+        return dp[m][n];
+    }
+};
