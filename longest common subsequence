@@ -13,6 +13,31 @@ Examples:
 L(“AGGTAB”, “GXTXAYB”) = 1 + L(“AGGTA”, “GXTXAY”)
 
 
+To print longest common subsequence:
+start from the last element.
+Then check the left,right and diagonal element.
+if all three elements are same then move towards diagonal element.(i,j  --> i--,j--)
+if left and right are not equal, then move towards maximum element.(i,j  --> max(i-1,j or i,j-1))
+we will print and we'll get the reverse string.
+int i=m,int j=n;
+string s;
+while(i>0 && j>0)
+    if(a[i-1]==b[j-1])
+ {s.pushback(a[i+1])
+ i--;
+ j--;
+ }
+    else
+    if(dp[i][j-1]>dp[i-1][j])
+    j--;
+    else
+    i--;
+    
+ reverse(s.begin(),s.end());
+ return s;
+    
+
+
 
 
 class Solution {
