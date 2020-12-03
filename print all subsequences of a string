@@ -1,0 +1,44 @@
+Algorithm O(2^n)
+
+Set start=-1, end=len, where len=length of string.
+Set curStr="", print it
+Fix character and add it into curStr and print curStr.
+for i = start +1 to end
+Fix character in curStr and prints the string
+Recursively generate all subsets starting from fix character.
+After each recursive call, remove the last character to generate the next sequence.
+Clear the curStr
+Set start=start+1
+if start < n , go to step 3.
+Stop.
+
+#include <iostream>
+#include <string>
+using namespace std;
+
+void printSubsequences(string str, int start, int end, string curStr = ""){
+	//base case
+	if (start == end) {
+		return;
+	}
+	//print current string permutation
+	cout<<curStr<< "  ";
+	for (int i = start + 1; i< end; i++) {
+		curStr += str[i];
+		printSubsequences(str, i, end, curStr);
+		curStr = curStr.erase(curStr.size() - 1);
+	}
+}
+
+int main(){
+	string s;
+
+	cout<< "Enter string : ";
+	cin>> s;
+	int len = s.size();
+	
+	cout<< "Subsequences : ";
+	printSubsequences(s, -1, len);
+	
+	return 0;
+}
