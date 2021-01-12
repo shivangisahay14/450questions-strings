@@ -1,0 +1,38 @@
+Time:O(n)
+space:O(n)
+
+
+class Solution {
+public:
+    int lengthOfLongestSubstring(string s) {
+        int res = 0, right= 0, left = -1;
+        unordered_map<char, int> m;
+        while (right < s.size()) {
+            if (m.count(s[right]) && m[s[right]] > left) {
+                left = m[s[right]];
+            }
+            m[s[right]] = right;
+            res = max(res, right- left+1);
+            ++right;
+        }
+        return res;
+    }
+};
+© 2021 GitHub, Inc.
+
+
+
+class Solution {
+public:
+    int lengthOfLongestSubstring(string s) {
+        int res = 0, i = 0, j = -1;
+        vector<int> m(128, -1);
+        while (i < s.size()) {
+            j = max(j, m[s[i]]);
+            m[s[i]] = i;
+            res = max(res, i - j);
+            ++i;
+        }
+        return res;
+    }
+};
