@@ -1,0 +1,24 @@
+vector <string> powerSet(string s)
+{
+    vector<string>ans;
+    int n=s.size();
+    string op=" ";
+    if(n==0){
+        ans.push_back(op);
+        return ans;
+        
+    }
+    
+    string op1=op;
+    string op2=op;
+    op2.push_back(s[0]);
+    s.erase(s.begin()+0);
+    powerSet(s);
+    powerSet(s);
+    ans.push_back(op2);
+    ans.push_back(op1);
+    
+    return ans;
+
+   //Your code here
+}
